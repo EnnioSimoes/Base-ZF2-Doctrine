@@ -1,0 +1,8 @@
+Olá <?php echo $this->nome; ?>
+<br/>
+<br/>
+<p>
+    Esse email tem o objetivo de confirmar seu cadastro em nosso sistema.
+    <br/>
+    Para ativar sua conta, acesse: http://<?php echo $this->url('eosuser-activate', array('key'=>$this->activationKey)); ?>
+</p>
