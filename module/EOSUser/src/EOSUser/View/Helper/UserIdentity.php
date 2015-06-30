@@ -9,11 +9,6 @@ use Zend\Authentication\Storage\Session as SessionStorage;
 class UserIdentity extends AbstractHelper {
 
     protected $authService;
-//
-//    public function __construct()
-//    {
-//        echo 'OKKK';
-//    }
     
     public function getAuthService() {
         return $this->authService;

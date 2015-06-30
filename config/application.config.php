@@ -8,6 +8,7 @@ return array(
         'DoctrineDataFixtureModule',
         'EOSBase',
         'EOSUser',
+        'EOSAcl',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
