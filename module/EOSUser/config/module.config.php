@@ -26,6 +26,28 @@ return array(
                     )
                 )
             ),
+            'eosuser-auth' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/auth',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'EOSUser\Controller',
+                        'controller' => 'Auth',
+                        'action' => 'index'
+                    )
+                )
+            ),
+            'eosuser-logout' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/auth/logout',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'EOSUser\Controller',
+                        'controller' => 'Auth',
+                        'action' => 'logout'
+                    )
+                )
+            ),
             'eosuser-admin' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -75,7 +97,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'EOSUser\Controller\Index' => 'EOSUser\Controller\IndexController',
-            'EOSUser\Controller\Users' => 'EOSUser\Controller\UsersController'
+            'EOSUser\Controller\Users' => 'EOSUser\Controller\UsersController',
+            'EOSUser\Controller\Auth' => 'EOSUser\Controller\AuthController'
         ),
     ),
     'view_manager' => array(
@@ -111,5 +134,10 @@ return array(
         'fixture' => array(
             'EOSUser_fixture' => __DIR__ . '/../src/EOSUser/Fixture/'//TALVEZ SEJA PRECISO REMOVER A BARRA FINAL
         )        
-    ),        
+    ),
+//    'view_helpers' => array(
+//        'invokables'=> array(
+//            'UserIdentity' => new \EOSUser\View\Helper\UserIdentity()
+//        )
+//    ),      
 );

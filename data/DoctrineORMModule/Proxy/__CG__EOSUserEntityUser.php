@@ -323,12 +323,12 @@ class User extends \EOSUser\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function encrytpPassword($password)
+    public function encryptPassword($password)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'encrytpPassword', array($password));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'encryptPassword', array($password));
 
-        return parent::encrytpPassword($password);
+        return parent::encryptPassword($password);
     }
 
     /**
