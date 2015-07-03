@@ -5,7 +5,6 @@ namespace EOSAcl;
 use Zend\Mvc\MvcEvent;
 use Zend\ModuleManager\ModuleManager;//Com esse é possivel pegar o EventManager com todos eventos compartilhados no ZF2
 
-use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 /**
@@ -35,7 +34,34 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
     public function getServiceConfig()
     {
         return array(
+            'factories' => array(
+                'EOSAcl\Form\Role' => function($sm){
+                    $em = $sm->get('Doctrine\ORM\EntityManager');
+                    $repo = $em->getRepository('EOSAcl\Entity\Role');
+                    $parent = $repo->fetchParent();
+                    
+                    return new Form\Role('role', $parent);
+                },
+                'EOSAcl\Form\Privilege' => function($sm){
+                    $em = $sm->get('Doctrine\ORM\EntityManager');
+                    $repoRoles = $em->getRepository('EOSAcl\Entity\Role');
+                    $roles = $repoRoles->fetchParent();
+                    
+                    $repoResources = $em->getRepository('EOSAcl\Entity\Resource');
+                    $resources = $repoResources->fetchPairs();
+                    
+                    return new Form\Privilege("privilege", $roles, $resources);
+                },
+                'EOSAcl\Service\Role' => function($sm){
+                    return new Service\Role($sm->get('Doctrine\ORM\EntityManager'));
+                },
+                'EOSAcl\Service\Resource' => function($sm){
+                    return new Service\Resource($sm->get('Doctrine\ORM\EntityManager'));
+                },
+                'EOSAcl\Service\Privilege' => function($sm){
+                    return new Service\Privilege($sm->get('Doctrine\ORM\EntityManager'));
+                },
+            )
         );
-        
     }
 }

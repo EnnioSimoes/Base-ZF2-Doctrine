@@ -12,116 +12,126 @@ use Zend\Stdlib\Hydrator;
  * @ORM\Table(name="eosacl_roles")
  * @ORM\Entity(repositoryClass="EOSAcl\Entity\RoleRepository")
  */
-class Role
+class Role 
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue)
-     */    
+     * @ORM\GeneratedValue
+     */
     protected $id;
+    
     /**
      * @ORM\OneToOne(targetEntity="EOSAcl\Entity\Role")
-     * @ORM\JoinColumn(name="parent_id", referenceColumnName="id")
-     */    
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
     protected $parent;
+    
     /**
      * @ORM\Column(type="text")
      * @var string
-     */      
+     */
     protected $nome;
+    
     /**
-     * @ORM\Column(type="boolean" name="is_admin")
+     * @ORM\Column(type="boolean", name="is_admin")
      * @var boolean
-     */      
+     */
     protected $isAdmin;
+    
     /**
      * @ORM\Column(type="datetime", name="created_at")
-     */          
+     */
     protected $createdAt;
+    
     /**
      * @ORM\Column(type="datetime", name="updated_at")
      */
     protected $updatedAt;
-
+    
+    
     public function __construct($options = array())
     {
         (new Hydrator\ClassMethods)->hydrate($options, $this);
-        $this->createdAt = new \DateTime('now');
-        $this->updatedAt = new \DateTime('now');
+        $this->createdAt = new \DateTime("now");
+        $this->updatedAt = new \DateTime("now");
     }
     
-    function getId() {
+    public function getId() {
         return $this->id;
     }
 
-    function getParent() {
-        return $this->parent;
-    }
-
-    function getNome() {
-        return $this->nome;
-    }
-
-    function getIsAdmin() {
-        return $this->isAdmin;
-    }
-
-    function getCreatedAt() {
-        return $this->createdAt;
-    }
-
-    function getUpdatedAt() {
-        return $this->updatedAt;
-    }
-
-    function setId($id) {
+    public function setId($id) {
         $this->id = $id;
         return $this;
     }
 
-    function setParent($parent) {
+    public function getParent() {
+        return $this->parent;
+    }
+
+    public function setParent($parent) {
         $this->parent = $parent;
         return $this;
     }
 
-    function setNome($nome) {
+    public function getNome() {
+        return $this->nome;
+    }
+
+    public function setNome($nome) {
         $this->nome = $nome;
         return $this;
     }
 
-    function setIsAdmin($isAdmin) {
+    public function getIsAdmin() {
+        return $this->isAdmin;
+    }
+
+    public function setIsAdmin($isAdmin) {
         $this->isAdmin = $isAdmin;
         return $this;
     }
 
-    function setCreatedAt() {
-        $this->createdAt = new \DateTime('now');
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt() {
+        $this->createdAt = new \Datetime("now");
         return $this;
     }
+
+    public function getUpdatedAt() {
+        return $this->updatedAt;
+    }
+
     /**
      * @ORM\PrePersist
      */
-    function setUpdatedAt() {
-        $this->updatedAt = new \DateTime('now');
+    public function setUpdatedAt() {
+        $this->createdAt = new \Datetime("now");
         return $this;
     }
-
+    
+    public function __toString() {
+        return $this->nome;
+    }
+    
     public function toArray()
     {
-        if(isset($this->parent)){
+        if(isset($this->parent))
             $parent = $this->parent->getId();
-        }else{
+        else 
             $parent = false;
-        }
-        return array(
-            'id' => $this->id,
-            'nome' => $this->nome,
-            'isAdmin'=> $this->isAdmin,
-            'parent'=> $parent
-        );
         
+        return array(
+          'id' => $this->id,
+          'nome' => $this->nome,
+            'isAdmin' => $this->isAdmin,
+            'parent' => $parent
+        );
     }
-
+    
 }
-

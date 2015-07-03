@@ -4,19 +4,17 @@ namespace EOSAcl\Entity;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Description of RoleRepository
+ * Description of ResourceRepository
  *
  * @author ennio
  */
-class RoleRepository extends EntityRepository
+class ResourceRepository extends EntityRepository
 {
-    public function fetchParent()
+    public function fetchPairs()
     {
         $entities = $this->findAll();
         $array = array();
-        
-        foreach ($entities as $entity){
-            //Populando um array com ex. $array[1] = Nome ...
+        foreach($entities as $entity){
             $array[$entity->getId()] = $entity->getNome();
         }
         return $array;

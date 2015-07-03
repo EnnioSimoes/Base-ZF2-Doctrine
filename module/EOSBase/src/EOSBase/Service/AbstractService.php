@@ -1,6 +1,6 @@
 <?php
 
-namespace EOSUser\Service;
+namespace EOSBase\Service;
 
 use Doctrine\ORM\EntityManager;
 use Zend\Stdlib\Hydrator;
@@ -32,7 +32,7 @@ abstract class AbstractService
         return $entity;
     }
     
-    public function update(array $date)
+    public function update(array $data)
     {
         $entity = $this->em->getReference($this->entity, $data['id']);
         (new Hydrator\ClassMethods())->hydrate($data, $entity);

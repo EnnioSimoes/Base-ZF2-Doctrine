@@ -1,6 +1,6 @@
 <?php
 
-namespace EOSUser;
+namespace EOSAcl;
 
 return array(
     'router' => array(
@@ -53,7 +53,9 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'EOSAcl\Controller\Roles' => 'EOSAcl\Controller\RolesController'
+            'EOSAcl\Controller\Roles' => 'EOSAcl\Controller\RolesController',
+            'EOSAcl\Controller\Resources' => 'EOSAcl\Controller\ResourcesController',
+            'EOSAcl\Controller\Privileges' => 'EOSAcl\Controller\PrivilegesController'
         ),
     ),
     'view_manager' => array(
@@ -87,7 +89,7 @@ return array(
         ),
         // Nova maneira de usardatafixture.
         'fixture' => array(
-            'EOSUser_fixture' => __DIR__ . '/../src/EOSAcl/Fixture/'//TALVEZ SEJA PRECISO REMOVER A BARRA FINAL
+            'EOSAcl_fixture' => __DIR__ . '/../src/EOSAcl/Fixture/'//TALVEZ SEJA PRECISO REMOVER A BARRA FINAL
         )        
     ),
 //    'view_helpers' => array(

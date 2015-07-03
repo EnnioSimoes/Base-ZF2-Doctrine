@@ -32,7 +32,7 @@ abstract class AbstractService
         return $entity;
     }
     
-    public function update(array $date)
+    public function update(array $data)
     {
         $entity = $this->em->getReference($this->entity, $data['id']);
         (new Hydrator\ClassMethods())->hydrate($data, $entity);
