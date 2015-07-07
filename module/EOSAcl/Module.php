@@ -61,6 +61,19 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
                 'EOSAcl\Service\Privilege' => function($sm){
                     return new Service\Privilege($sm->get('Doctrine\ORM\EntityManager'));
                 },
+                'EOSAcl\Permissions\Acl' => function($sm){
+                    $em = $sm->get('Doctrine\ORM\EntityManager');
+                    $repoRole = $em->getRepository('EOSAcl\Entity\Role');
+                    $roles = $repoRole->findAll();
+                    
+                    $repoResource = $em->getRepository('EOSAcl\Entity\Resource');
+                    $resources = $repoResource->findAll();
+                    
+                    $repoPrivilege = $em->getRepository('EOSAcl\Entity\Privilege');
+                    $privileges = $repoPrivilege->findAll();
+                    
+                    return new Permissions\Acl($roles, $resources, $privileges);
+                },
             )
         );
     }

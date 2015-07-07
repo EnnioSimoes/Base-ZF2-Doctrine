@@ -65,5 +65,15 @@ class RolesController extends CrudController
             }
         }
         return new ViewModel(array('form'=>$form));
-    }    
+    }
+    
+    
+    public function testeAction()
+    {
+        $acl = $this->getServiceLocator()->get('\EOSAcl\Permissions\Acl');
+        
+        echo $acl->isAllowed("Redator", "Posts", "Excluir")? "Permitido" : "Negado";
+        //echo 'OK';
+        die();
+    }
 }
